@@ -1,0 +1,13 @@
+div {
+	&.bgimg {
+		background-image: url("
+https://i.ytimg.com/vi/hmMdUsD-Y5c/maxresdefault.jpg");
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: center center;
+position: fixed;
+height: 100%;
+width: 100%;
+background-color: red;
+}
+}
