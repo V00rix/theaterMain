@@ -1,13 +1,41 @@
 div {
 	&.bgimg {
-		background-image: url("
-https://i.ytimg.com/vi/hmMdUsD-Y5c/maxresdefault.jpg");
+		// background
+		background-image: url("https://i.ytimg.com/vi/hmMdUsD-Y5c/maxresdefault.jpg");
 		background-size: cover;
 		background-repeat: no-repeat;
 		background-position: center center;
-position: fixed;
-height: 100%;
-width: 100%;
-background-color: red;
+		filter: brightness(50%) blur(5px);
+		// white border fix
+		transform: scale(1.1); 
+		// position
+		position: fixed;
+		// size
+		height: 100%;
+		width: 100%;
+	}
+	&.foreground {
+		// position
+		position: fixed;
+		// size
+		height: 100%;
+		width: 100%;
+		// align
+		text-align: center;
+		display:flex;justify-content:center;
+		align-items:center;
+	}
+	&.perfInfo {
+		cursor: pointer;
+	}
 }
+
+h1, h2 {
+	color: black;
+	font-size: 10rem;
+	text-shadow: 0px 0px 20px black;
+}
+
+h2 {
+	font-size: 5rem;
 }

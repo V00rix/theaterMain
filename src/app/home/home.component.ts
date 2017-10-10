@@ -2,27 +2,33 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from "rxjs/Subscription";
 
+import { PerformanceService } from '../services/performace.service';
+import { Performance, Session, Availability, Seat } from '../shared/performance.model';
+
 @Component({
 	selector: 'app-home',
 	templateUrl: './home.component.html',
-	styleUrls: ['./home.component.scss']
+	styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit, OnDestroy {
 	private subscription: Subscription;
-	private qParams: String;
+	private pid: number;
+	private performance: Performance;
 
 	constructor(private route: ActivatedRoute,
-		private router: Router) { }
+		private router: Router, 
+		private performanceService: PerformanceService) { }
 
 	ngOnInit() {
 		this.subscription = this.route
 		.queryParams
 		.subscribe(params => {
-			// Defaults to 0 if no query param provided.
-			// console.log(params['perf']);
-			this.qParams = params['perf']; 
-			console.log(this.qParams);
-			
+			this.performance = this.performanceService.getPerformances()[0];
+			this.pid = +params['pid'];					
+			if (!isNaN(this.pid))  
+				this.performance = this.performanceService.getPerformance(this.pid - 1);
+			else 
+				console.log("Error in query string!\n\tPerformance id in NaN!");				
 		});
 	}
 
