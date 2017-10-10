@@ -23,16 +23,36 @@ export class HomeComponent implements OnInit, OnDestroy {
 		this.subscription = this.route
 		.queryParams
 		.subscribe(params => {
-			this.performance = this.performanceService.getPerformances()[0];
+			this.performance = this.performanceService.getPerformance(0);
 			this.pid = +params['pid'];					
 			if (!isNaN(this.pid))  
 				this.performance = this.performanceService.getPerformance(this.pid - 1);
 			else 
-				console.log("Error in query string!\n\tPerformance id in NaN!");				
+				console.log("Error in query string!\n\tPerformance id is NaN!");				
 		});
+		this.nextPage();
+		setInterval(() => {
+			this.nextPage()
+		}, 3000);
 	}
 
 	ngOnDestroy() {
 		this.subscription.unsubscribe();
+	}
+
+	nextPage() {
+		this.pid = ++this.pid > this.performanceService.getPerformances().length - 2 ? 0 : this.pid;
+		this.performance = this.performanceService.getPerformance(this.pid);
+		/* TODO 
+		TRANSITION ANIMATION
+		*/
+
+
+
+
+	}
+
+	onPerformanceClicked() {
+		this.router.navigate(['/info'], {queryParams: { pid: this.pid }, relativeTo: this.route});
 	}
 }

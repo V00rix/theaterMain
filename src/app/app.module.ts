@@ -10,6 +10,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { HomeComponent } from './home/home.component';
 
 import { PerformanceService } from './services/performace.service';
+import { InfoComponent } from './info/info.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { PerformanceService } from './services/performace.service';
     HeaderComponent,
     SceneComponent,
     NotFoundComponent,
-    HomeComponent
+    HomeComponent,
+    InfoComponent
   ],
   imports: [
     BrowserModule,

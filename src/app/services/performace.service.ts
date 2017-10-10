@@ -999,9 +999,9 @@ export class PerformanceService {
 		,
 	];
 
-	constructor() {
-		
-	}
+	
+
+	constructor() {}
 
 	getPerformances(): Performance[] {
 		return this.performances.slice();
