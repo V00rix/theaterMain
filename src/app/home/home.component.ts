@@ -27,8 +27,10 @@ export class HomeComponent implements OnInit, OnDestroy {
 			this.pid = +params['pid'];					
 			if (!isNaN(this.pid))  
 				this.performance = this.performanceService.getPerformance(this.pid - 1);
-			else 
-				console.log("Error in query string!\n\tPerformance id is NaN!");				
+			else  {
+				console.log("Error in query string!\n\tPerformance id is NaN!");	
+				this.pid = 0;			
+			}
 		});
 		this.nextPage();
 		setInterval(() => {
@@ -53,6 +55,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 	}
 
 	onPerformanceClicked() {
-		this.router.navigate(['/info'], {queryParams: { pid: this.pid }, relativeTo: this.route});
+		this.router.navigate(['/info'], {queryParams: { pid: this.pid+1 }, relativeTo: this.route});
 	}
 }

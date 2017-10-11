@@ -1,3 +1,4 @@
-<p>
-  scene works!
-</p>
+<div *ngFor="let row of this.session.seats; let i = index" [style.width]="40*row.length+'px'">
+	<hr>
+  <div *ngFor="let seat of row; let j = index" class="seat"></div>
+</div>

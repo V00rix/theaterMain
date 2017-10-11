@@ -12,6 +12,7 @@ const appRoutes: Routes = [
 {path: '', redirectTo: '/home', pathMatch: 'full' },
 {path: 'home', component: HomeComponent},
 {path: 'info', component: InfoComponent },
+{path: 'scene', component: SceneComponent },
 {path: 'page-not-found', component: NotFoundComponent},																
 // {path: '**', redirectTo: '/page-not-found'}																
 ];

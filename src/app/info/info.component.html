@@ -1,3 +1,19 @@
-<p>
-  info works!
-</p>
+<div class="container">
+	<div class="row">
+		<!-- Short -->
+		<div class="col-xs-8">
+			<div class="description">
+				<h3>Title: {{ this.performance.name }}</h3>
+				<h3>Description: {{ this.performance.description }}</h3>
+				<!-- Some other data should be written here -->
+				<h3>Premiere: {{ this.performance.sessions[0].time | date:'mediumDate' }}</h3>
+			</div>
+		</div>
+		<!-- Cover image -->
+		<div class="col-xs-4">
+			<img src="http://static.wixstatic.com/media/7522cb_f0b35177ad9a41c0ae0c0bdb99976fc1~mv2.jpg/v1/fill/w_753,h_480,al_c,q_85/7522cb_f0b35177ad9a41c0ae0c0bdb99976fc1~mv2.webp" alt="" class="cover img-responsive">
+		</div>
+		<app-sessions [performance]="this.performance" 
+		[pid]="this.pid"></app-sessions>
+	</div>
+</div>
