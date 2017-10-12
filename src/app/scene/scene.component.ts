@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
-import { Performance, Session } from '../shared/performance.model';
+import { Performance, Session, Availability } from '../shared/performance.model';
 import { PerformanceService } from '../services/performace.service';
 
 @Component({
@@ -39,4 +39,25 @@ export class SceneComponent implements OnInit {
 		console.log(this.session.seats.length);
 	}
 
+	private getLongestRow(): number {
+		let highestCount = 0;
+		for (let row of this.session.seats) {
+			console.log(row.length);
+			if (row.length > highestCount)
+				highestCount = row.length;
+		}
+		console.log(highestCount);
+		return highestCount;
+	}
+
+	private getClass(row: number, seat: number) {
+		switch (this.session.seats[row][seat].availability) {
+			case Availability.Available:
+			return { "available" : true};
+			case Availability.Booked:
+			return { "booked" : true};
+			case Availability.Hidden:
+			return { "inactive" : true};
+		}
+	}
 }

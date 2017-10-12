@@ -1,14 +1,52 @@
-.seat 
+div
 {
+	text-align: center;
+	line-height: 30px;
+	color: black;
+	// other
+	display: inline-block;
+	&.seat
+	{
 		// size
 		width: 30px;
 		height: 30px;
 		// margin, padding
-		padding: 5px;
-		margin: 5px;
+		margin: 0px;
+		padding: 0px;
+		margin-left: 2px;
+		margin-right: 2px;
+		padding-left: 2px;
+		padding-right: 2px;
 		// border
 		border: 1px solid grey;
 		border-radius: 5px;
+		&.available {
+			cursor: pointer;
+			// available seat
+		}
+		&.booked {
+			background-color: grey;
+			opacity: .3;
+		}
+		&.inactive {
+			opacity: 0;
+		}
+	}
+	&.rowInfo
+	{
+		// size
+		height: 30px;
+		width: 50px;
+		// margin, padding
+		margin: 0px;
+		// border
 		// other
 		display: inline-block;
 	}
+}
+
+hr {
+	opacity: 0;
+	width: 80%;
+	margin: 2px;
+}
