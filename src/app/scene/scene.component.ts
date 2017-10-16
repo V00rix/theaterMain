@@ -15,6 +15,7 @@ export class SceneComponent implements OnInit {
 	private session: Session;
 	private pid: number;
 	private sid: number;
+	private selectedSeat: Element;
 
 	constructor(private route: ActivatedRoute,
 		private psv: PerformanceService) { }
@@ -36,17 +37,15 @@ export class SceneComponent implements OnInit {
 				this.pid = 0;			
 			}
 		});
-		console.log(this.session.seats.length);
+		console.log(this.performance.name);
 	}
 
 	private getLongestRow(): number {
 		let highestCount = 0;
 		for (let row of this.session.seats) {
-			console.log(row.length);
 			if (row.length > highestCount)
 				highestCount = row.length;
 		}
-		console.log(highestCount);
 		return highestCount;
 	}
 
@@ -59,5 +58,15 @@ export class SceneComponent implements OnInit {
 			case Availability.Hidden:
 			return { "inactive" : true};
 		}
+	}
+
+	private onSeatSelected(event: Event): void {
+		if (event.srcElement.classList.contains("booked") ||
+			event.srcElement.classList.contains("inactive"))
+			return;
+		if (this.selectedSeat != undefined)
+			this.selectedSeat.classList.remove("selected");
+		this.selectedSeat = event.srcElement;		
+		this.selectedSeat.classList.add("selected");
 	}
 }

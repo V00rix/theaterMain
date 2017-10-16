@@ -1,9 +1,22 @@
-
-<div class="cont" [style.width]="((34*this.getLongestRow())+75)+'px'"><!-- <div *ngFor="let row of this.session.seats; let i = index" class="row"> -->
-	<div *ngFor="let row of this.session.seats; let i = index" [style.width]="(34*row.length+75)+'px'">
-		<hr>
-		<div class="rowInfo">{{ this.session.seats.length-i }}. row</div>
-		<div *ngFor="let seat of row; let j = index" class="seat"
-		[ngClass]="this.getClass(i, j)">{{j + 1}}</div>
+<div class="container">
+	<div class="row">
+		<div class="header-divider"></div>
+		<div class="col-xs-12 col-sm-4 text-left">
+			<h1> {{ this.performance.name | uppercase }} </h1>
+		</div>
+		<div class="col-xs-12 col-sm-8 text-right">
+			<h3> {{ this.session.time | date:'yMMMdjms' }} </h3>
+			<hr>
+		</div>
+	</div>
+</div>
+<div class="no-overflow" [style.height]="(34*(this.session.seats.length-1)+75)+'px'">
+	<div class="cont" [style.width]="((34*this.getLongestRow())+75)+'px'"><!-- <div *ngFor="let row of this.session.seats; let i = index" class="row"> -->
+		<div class="rowT" *ngFor="let row of this.session.seats; let i = index" [style.width]="(34*row.length+75)+'px'">
+			<hr>
+			<div class="rowInfo">{{ this.session.seats.length-i }}. row</div>
+			<div *ngFor="let seat of row; let j = index" class="seat"
+			[ngClass]="this.getClass(i, j)" (click)="onSeatSelected($event)">{{j + 1}}</div>
+		</div>
 	</div>
 </div>
