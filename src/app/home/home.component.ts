@@ -17,16 +17,16 @@ export class HomeComponent implements OnInit, OnDestroy {
 
 	constructor(private route: ActivatedRoute,
 		private router: Router, 
-		private performanceService: PerformanceService) { }
+		private psv: PerformanceService) { }
 
 	ngOnInit() {
 		this.subscription = this.route
 		.queryParams
 		.subscribe(params => {
-			this.performance = this.performanceService.getPerformance(0);
+			this.performance = this.psv.getPerformance(0);
 			this.pid = +params['pid'];					
 			if (!isNaN(this.pid))  
-				this.performance = this.performanceService.getPerformance(this.pid - 1);
+				this.performance = this.psv.getPerformance(this.pid - 1);
 			else  {
 				console.log("Error in query string!\n\tPerformance id is NaN!");	
 				this.pid = 0;			
@@ -43,8 +43,9 @@ export class HomeComponent implements OnInit, OnDestroy {
 	}
 
 	nextPage() {
-		this.pid = ++this.pid > this.performanceService.getPerformances().length - 2 ? 0 : this.pid;
-		this.performance = this.performanceService.getPerformance(this.pid);
+		this.pid = ++this.pid > this.psv.getPerformances().length - 2 ? 0 : this.pid;
+		this.performance = this.psv.getPerformance(this.pid);
+		this.psv.selectPerformance(this.pid);
 		/* TODO 
 		TRANSITION ANIMATION
 		*/

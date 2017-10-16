@@ -1,13 +1,14 @@
 div {
 	&.bgimg {
 		// background
+		z-index: -100;
 		background-image: url("https://i.ytimg.com/vi/hmMdUsD-Y5c/maxresdefault.jpg");
 		background-size: cover;
 		background-repeat: no-repeat;
 		background-position: center center;
 		filter: brightness(50%) blur(5px);
 		// white border fix
-		transform: scale(1.1); 
+		transform: scale(1.5); 
 		// position
 		position: fixed;
 		// size

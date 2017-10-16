@@ -5,8 +5,11 @@ import { Subject } from 'rxjs/Subject';
 @Injectable()
 export class PerformanceService {
 	performancesChanged = new Subject<Performance[]>();
+	performanceChanged = new Subject<{performance: Performance, id: number}>();
+	sessionChanged = new Subject<{session: Session, id: number}>();
 
 	// this should be changed later (from DB)
+	// get this at start
 	private performances:Performance[] = [
 		new Performance("Blocked", "Can you survive the air?", [
 		new Session(new Date(2017, 12, 1),
@@ -1008,15 +1011,58 @@ export class PerformanceService {
 		,
 	];
 
-	
+	// should be initialized elsewhere!
+	private selectedPerformanceId: number = 0;
+	private selectedSessionId: number = 0;
+
+	public selectedPerformance(): Performance {
+		return this.performances[this.selectedPerformanceId];
+	}
+
+	public selectedSession(): Session {
+		return this.performances[this.selectedPerformanceId].sessions[this.selectedSessionId];
+	}
+
+	public selectPerformance(id: number): void {
+		this.selectedPerformanceId = id;
+		this.performanceChanged.next({
+			performance: this.selectedPerformance(),
+			id: this.selectedPerformanceId
+		});
+	}
+
+	public selectSession(id: number): void {
+		this.selectedSessionId = id;
+		this.sessionChanged.next({
+			session: this.selectedSession(),
+			id: this.selectedSessionId
+		});
+	}
+
+	public selectPS(pid: number, sid: number): void {
+		this.selectedPerformanceId = pid;
+		this.selectedSessionId = sid;
+		this.performanceChanged.next({
+			performance: this.selectedPerformance(),
+			id: this.selectedPerformanceId
+		});
+		this.sessionChanged.next({
+			session: this.selectedSession(),
+			id: this.selectedSessionId
+		});	
+	}
+
+
 
 	constructor() {}
+	// TODO: this should be gotten from server
+	// constructor(private performances: Performance[]) {}
 
-	getPerformances(): Performance[] {
+	public getPerformances(): Performance[] {
 		return this.performances.slice();
 	}
 
-	getPerformance(pid: number): Performance {
+	public getPerformance(pid: number): Performance {
 		if (pid > this.performances.length - 2)
 			throw "Performance ID exceeds total number of performances!";
 		if (pid < 0)
@@ -1025,22 +1071,22 @@ export class PerformanceService {
 		return this.performances[pid];
 	}
 
-	addPerformance(Performance: Performance): void {
+	public addPerformance(Performance: Performance): void {
 		this.performances.push(Performance);
 		this.performancesChanged.next(this.performances.slice());
 	}
 
-	updatePerformance(id: number, Performance: Performance): void {
+	public updatePerformance(id: number, Performance: Performance): void {
 		this.performances[id] = Performance;
 		this.performancesChanged.next(this.performances.slice());
 	}
 
-	deletePerformance(id: number): void {
+	public deletePerformance(id: number): void {
 		this.performances.splice(id, 1);
 		this.performancesChanged.next(this.performances.slice());
 	}
 
-	loadPerformances(performances: Performance[]): void {
+	public loadPerformances(performances: Performance[]): void {
 		this.performances = performances;
 		this.performancesChanged.next(this.performances.slice());
 	}

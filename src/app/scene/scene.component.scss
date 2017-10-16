@@ -63,12 +63,9 @@ div
 		display: inline-block;
 		text-align: center;
 	}
-	&.header-divider {
-		height: 50px;
-	}
 }
 
-hr {
+hr.invisible {
 	opacity: 0;
 	width: 80%;
 	margin: 2px;

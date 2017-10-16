@@ -1,21 +1,17 @@
 div {
 	&.nav-background {
-		// position
-		position: fixed;
-		left: calc(50%  - 250px);
+		position: relative;
 		top: -50px;
 		// background
-		width: 500px;
 		height: 100px;
 		background-color: black;
-		border-radius: 50%;
-		filter: blur(10px);
 		opacity: .5;
 	}
 	&.home {
 		// position
-		position: fixed;
+		position: absolute;
 		left: calc(50%  - 25px);
+		top: 0px;
 		// size
 		width: 50px;
 		height: 50px;
@@ -37,4 +33,12 @@ div {
 			background-size: 90% 90%;	
 		}
 	}
+}
+
+p {
+	position: absolute;
+    top: 0;
+	display: inline;
+	font-size: 2em;
+	line-height: 100%;
 }
