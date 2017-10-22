@@ -9,8 +9,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { InfoComponent  } from './info/info.component';
 
 const appRoutes: Routes = [
-{path: '', redirectTo: '/home', pathMatch: 'full' },
-{path: 'home', component: HomeComponent},
+{path: '', component: HomeComponent},
 {path: 'info', component: InfoComponent },
 {path: 'scene', component: SceneComponent },
 {path: 'page-not-found', component: NotFoundComponent},																

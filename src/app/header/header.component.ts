@@ -12,32 +12,45 @@ export class HeaderComponent implements OnInit, OnDestroy {
 	private performanceName: string;
 	private sessionDate: Date;
 	// this should be read from router params etc.
-	private inBookingSection: boolean;
-	private subscription: Subscription;
+	private subscriptions: Subscription[];
 
 	constructor(private psv: PerformanceService,
 		private router: Router) { }
 
 	ngOnInit() {
-		this.subscription = this.router.events.subscribe(event => {
-			if(event instanceof NavigationStart) {
-				this.performanceName = this.psv.selectedPerformance().name;
-				this.sessionDate = this.psv.selectedSession().time;
-			}
-		});
-
-		this.subscription = this.psv.performanceChanged.subscribe(
+		this.subscriptions[0] = this.psv.performanceChanged.subscribe(
 			({performance, id}) => {
 				this.performanceName = performance.name;
+			});
+		this.subscriptions[1] = this.psv.sessionChanged.subscribe(
+			({session, id}) => {
+				this.sessionDate = session.time;
 			});
 	}
 
 	ngOnDestroy() {
-		this.subscription.unsubscribe();
+		this.subscriptions.forEach(value => value.unsubscribe());
 	}
 
-	onGoHome() {
-		this.router.navigate(['/home'], {queryParams: {pid: 1}});
+	private onGoHome() {
+		this.router.navigate(['/'], {queryParams: {pid: 1}});
 	}
 
+	private selectedSection(section: Section): number {
+		switch (section) {
+			case Section.Performance:
+				return 0;
+			case Section.Session:
+				return 1;
+			case Section.Session:
+				return 2;
+		}
+	} 
+
+}
+
+enum Section {
+	Performance, // at /<perfName>	(Info)
+	Session,	// at /<perfName>/<session> (Scene)
+	Book
 }

@@ -5,6 +5,7 @@ import { Subject } from 'rxjs/Subject';
 @Injectable()
 export class PerformanceService {
 	performancesChanged = new Subject<Performance[]>();
+
 	performanceChanged = new Subject<{performance: Performance, id: number}>();
 	sessionChanged = new Subject<{session: Session, id: number}>();
 
@@ -1012,8 +1013,8 @@ export class PerformanceService {
 	];
 
 	// should be initialized elsewhere!
-	private selectedPerformanceId: number = 0;
-	private selectedSessionId: number = 0;
+	private selectedPerformanceId: number;
+	private selectedSessionId: number;
 
 	public selectedPerformance(): Performance {
 		return this.performances[this.selectedPerformanceId];
@@ -1054,10 +1055,12 @@ export class PerformanceService {
 
 
 
-	constructor() {}
+	constructor() {
+		console.log('y');
+	}
+
 	// TODO: this should be gotten from server
 	// constructor(private performances: Performance[]) {}
-
 	public getPerformances(): Performance[] {
 		return this.performances.slice();
 	}

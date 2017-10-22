@@ -36,9 +36,12 @@ export class HomeComponent implements OnInit, OnDestroy {
 		setInterval(() => {
 			this.nextPage()
 		}, 3000);
+
+
 	}
 
 	ngOnDestroy() {
+		console.log(12);
 		this.subscription.unsubscribe();
 	}
 

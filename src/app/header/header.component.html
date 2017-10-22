@@ -1,3 +1,6 @@
 <div class="nav-background"></div>
 <div class="home" (click)="onGoHome()"></div>
-<p><span>{{this.performanceName}}</span><span>{{this.sessionDate | date:'yMMMd' }}</span><span *ngIf="this.inBookingSection">Booking</span></p>
+<p>
+	<span *ngIf="this.performanceName != null">{{this.performanceName}}</span>
+	<span *ngIf="this.sessionDate != null">{{this.sessionDate | date:'yMMMd' }}</span>
+</p>
