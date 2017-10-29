@@ -1,35 +1,41 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, EventEmitter, Output } from '@angular/core';
 import { PerformanceService } from '../services/performace.service';
-import { Performance } from '../shared/performance.model';
+import { Performance, Session } from '../shared/data.model';
 import { Subscription } from 'rxjs/Subscription';
-import { ActivatedRoute } from '@angular/router';
+import { Animations } from '../animations/animations';
 
 @Component({
 	selector: 'app-info',
 	templateUrl: './info.component.html',
-	styleUrls: ['./info.component.scss']
+	styleUrls: ['./info.component.scss'],
+	animations: [Animations.inOpacityScale]
 })
-export class InfoComponent implements OnInit {
-	private performance: Performance;
-	private pid: number;
-	private subscription: Subscription;
+export class InfoComponent implements OnInit, OnDestroy {
+	public performance: Performance;
+	public subscription: Subscription;
+	@Output() scene = new EventEmitter<boolean>();
 
-	constructor(private psv: PerformanceService,
-		private route: ActivatedRoute) { }
+	constructor(public psv: PerformanceService) { }
 
-	ngOnInit() {
-		this.subscription = this.route
-		.queryParams
-		.subscribe(params => {
-			this.performance = this.psv.getPerformance(0);
-			this.pid = +params['pid'];					
-			if (!isNaN(this.pid))  
-				this.performance = this.psv.getPerformance(this.pid - 1);
-			else  {
-				console.log("Error in query string!\n\tPerformance id is NaN!");	
-				this.pid = 0;			
-			}
-		});
+	ngOnInit(): void {
+		this.performance = this.psv.selectedPerformance();
+		this.subscription = this.psv.performancesChanged.subscribe(
+			() => {
+				// console.log("Reading selected performance into info component.");	
+				this.performance = this.psv.selectedPerformance();
+			});
 	}
 
+	ngOnDestroy(): void {
+		this.subscription.unsubscribe();
+	}
+
+	onSessionSelected(sid: number): void {		
+		this.psv.selectSession(sid);		
+		this.scene.emit(true);
+	}
+
+	smallScreen() {
+		return (window.innerWidth < 680);
+	}
 }

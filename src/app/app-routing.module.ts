@@ -3,16 +3,16 @@ import { NgModule } from '@angular/core';
 
 import { Routes, RouterModule } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
-import { HomeComponent } from './home/home.component';
+import { BackgroundComponent } from './background/background.component';
 import { SceneComponent } from './scene/scene.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { InfoComponent  } from './info/info.component';
 
 const appRoutes: Routes = [
-{path: '', component: HomeComponent},
+{path: '', component: BackgroundComponent},
 {path: 'info', component: InfoComponent },
 {path: 'scene', component: SceneComponent },
-{path: 'page-not-found', component: NotFoundComponent},																
+{path: '404', component: NotFoundComponent},																
 // {path: '**', redirectTo: '/page-not-found'}																
 ];
 

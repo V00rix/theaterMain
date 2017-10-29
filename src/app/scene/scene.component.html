@@ -1,21 +1,44 @@
-<div class="container">
-	<div class="row">
-		<div class="col-xs-12 col-sm-4 text-left">
-			<h1> {{ this.performance.name | uppercase }} </h1>
-		</div>
-		<div class="col-xs-12 col-sm-8 text-right">
-			<h3> {{ this.session.time | date:'yMMMdjms' }} </h3>
-			<hr>
+<div class="return" (click)="goBack()">Back</div>
+
+<div class="row" style="text-align: center; padding-right: 15px; padding-left: 15px;">
+	<div>
+		<h1> {{ performanceName | uppercase }} </h1>
+	</div>
+	<div>
+		<h3> {{ session.date | date:'MMMM d, H:m' }} </h3>
+	</div>
+</div>
+
+<div style="display: table; width: 100%; height: 100%; z-index: 10; top: 0">
+	<div class="vdiv">
+		<div class="anotherContainer" style="overflow: scroll;"  mouseWheel (mouseWheelUp)="onScroll(0.1, $event)" (mouseWheelDown)="onScroll(-0.1, $event)" #scrollElement>
+			<div style="display: table; width: 100%; height: 100%; z-index: 10; top: 0">
+				<div class="vdiv">
+					<div class="no-overflow" [style.height]="(34*(session.seats.length-1)+75)+'px'" [style.zoom]="zoomFactor">
+						<div class="cont" [style.width]="((34*getLongestRow())+75)+'px'">
+							<div class="rowT" *ngFor="let row of session.seats; let i = index" [style.width]="(34*row.length+75)+'px'">
+								<hr class="invisible">
+								<div class="rowInfo">{{ session.seats.length-i }}. row</div>
+								<div *ngFor="let seat of row; let j = index" class="seat"
+								[ngClass]="getClass(i, j)" (click)="onSeatSelected($event, i, j)">{{j + 1}}</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
-<div class="no-overflow" [style.height]="(34*(this.session.seats.length-1)+75)+'px'">
-	<div class="cont" [style.width]="((34*this.getLongestRow())+75)+'px'"><!-- <div *ngFor="let row of this.session.seats; let i = index" class="row"> -->
-		<div class="rowT" *ngFor="let row of this.session.seats; let i = index" [style.width]="(34*row.length+75)+'px'">
-			<hr class="invisible">
-			<div class="rowInfo">{{ this.session.seats.length-i }}. row</div>
-			<div *ngFor="let seat of row; let j = index" class="seat"
-			[ngClass]="this.getClass(i, j)" (click)="onSeatSelected($event)">{{j + 1}}</div>
-		</div>
+
+<div id="showFields" *ngIf="seats.length" (click)="displayFields(true)" [@slideIn]="smallScreen() ? 'fromBottom' : 'fromRight'" style="z-index: 100;">
+	Confirm
+</div>
+<div class="hider" *ngIf="fields" [@slideIn]="smallScreen() ? 'fromTop' : 'fromLeft'" (click)="displayFields(false)">
+	<div class="vdiv">
+		<p>Click to choose<br>more seats</p>
 	</div>
+</div>
+<div class="fileds" *ngIf="fields" style="z-index: 101;" [@slideIn]="smallScreen() ? 'fromBottom' : 'fromRight'">
+	<app-fields [performanceName]="performanceName"	[sessionDate]="session.date"
+	[seats]="seats" (seatCanceled)="cancelSeat($event)" (message)="displayMessage($event)"></app-fields>
 </div>

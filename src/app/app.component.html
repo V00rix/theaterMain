@@ -1,2 +1,38 @@
-<app-header></app-header>
-<router-outlet></router-outlet>
+<div class="header" *ngIf="psv.performances.length &gt; 1">
+  <app-header (info)="displayInfo($event)" (scene)="displayScene($event)"
+  (resetTimer)="tryReset()" [collapsed]="collapse" [sceneShown]="scene"></app-header>
+</div>
+<div class="header back" *ngIf="(psv.performances.length &lt; 2) && (info || scene)" 
+[@fadeIn]="'displayed'" (click)="goBack()">
+<h2>Back</h2>
+</div>
+<div class="remainer" [ngClass]="{'remainer-full': psv.performances.length &lt; 2}">
+  <app-background (info)="displayInfo($event)" (click)="onCollapseHeader()"></app-background>
+  <div class="hider" *ngIf="info" (click)="displayInfo(false)" [@fadeIn]="'displayed'"></div>
+  <app-info [ngClass]="{'info remainer-full': psv.performances.length &lt; 2}" *ngIf="info" (scene)="displayScene($event)" (click)="onCollapseHeader()"></app-info>
+</div>
+
+<div class="hider" *ngIf="scene" (click)="displayScene(false)" [style.z-index]="!smallScreen() ? '1000' : '100'" [@fadeIn]="'displayed'"></div>
+<div class="scene" *ngIf="scene" (click)="onCollapseHeader()" [style.z-index]="!smallScreen() ? '1100' : '150'" [@inOpacityScale]="'displayed'"> 
+  <app-scene (scene)="displayScene($event)" (message)="displayMessage($event)"></app-scene>
+</div>
+
+<div class="hider" *ngIf="message" (click)="displayMessage(false)" style="z-index: 9000;">
+  <div style="display: table; width: 100%; height: 100%; z-index: 9100; top: 0">
+    <div class="vdiv">
+      <div class="messageBox">
+        <div class="text-center">
+          <div class="return">Success!<br>
+          Confirmation request was sent to</div>
+          <div class="wrapper">
+            <div><span class="name">{{confirmer.Name}}<button (click)="goTo('https://' + confirmer.VK)" class="button">VK</button></span></div>
+            <div><span class="field">Phone: {{confirmer.Phone}}</span></div>
+            <div><span class="field" >Email: {{confirmer.Email}}</span></div>
+            <div><span class="field">WhatsApp/Telegram/Viber: {{confirmer.WhatsApp}}</span></div>
+          </div>
+        </div>
+        <h2 class="return">(click to return to home page)</h2>
+      </div>
+    </div>
+  </div>  
+</div>

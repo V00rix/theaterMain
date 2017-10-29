@@ -1,0 +1,19 @@
+<form (ngSubmit)="onConfirm()">
+	<div class="fcontainer" *ngFor="let seat of seats">		
+		<h2>Row <span style="background-color: #3f685b">{{seat.fromScreen}}</span></h2> <h2>Seat <span>{{seat.fromLeft}}</span></h2>
+		<div *ngFor="let property of seat.viewer | properties; let id = index" class="form-group text-left">			
+			<label for="{{property}}" class="attributes"> 
+				{{property}}: 
+			</label>
+			<input type="text" name="{{property}}" id="{{id}}"
+			[value]="seat.viewer[property]" (input)="onInput(seat, $event, d)" 
+			(focus)="focus($event, d)" (focusout)="focus($event, d)" >
+			<div class="alert alert-danger hidden" #d>
+				Invalid {{property}}
+			</div>
+
+	</div>
+	<button class="btn btn-danger" type="button" (click)="cancelSeat(seat)">Cancel seat</button>
+</div>
+<button class="btn btn-primary confirm" type="submit" [ngClass]="!dataValid() ? 'disabled' : ''" [disabled]="!dataValid()">Confirm</button>
+</form>

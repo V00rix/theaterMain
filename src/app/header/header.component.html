@@ -1,6 +1,28 @@
-<div class="nav-background"></div>
-<div class="home" (click)="onGoHome()"></div>
-<p>
-	<span *ngIf="this.performanceName != null">{{this.performanceName}}</span>
-	<span *ngIf="this.sessionDate != null">{{this.sessionDate | date:'yMMMd' }}</span>
-</p>
+<div class="header-container"  (window:resize)="onResize()" (mouseleave)="switchCollapse(undefined,2)"  [@inOpacityScale_Long]="'displayed'"
+[style.z-index]="getWidth() ? 400 : 100"
+[style.height]="getWidth() ? (collapsed ? '50px' : 'auto') : '100%'" [style.overflow]="'none'">	
+<h2 (mouseenter)="switchCollapse()" (click)="clickCollapse()">
+	{{ 'Performances' | uppercase }}
+</h2>
+<div class="performance" 
+*ngFor="let performance of performances; let pid = index" 
+[style.height]="(100/performances.length)+'%'" 
+(click)="onPerformanceSelected(pid)"
+[@flyInLeft]="collapsed === true ? 'hidden' : (getWidth() ? 'fromTop' : 'displayed')">
+<div style="display: table; width: 100%; height: calc(100% - 15px); top: 0">
+	<div style="display: table-cell; vertical-align: middle;">
+		<div class="perfs">	
+			<span class="pName">
+				{{ performance.Performance_name |  uppercase}}
+			</span>
+		</div>
+		<div class="sessions">
+			<span class="sDate" *ngFor="let session of performance.groupedSessions(); let sid = index" 
+			(click)="onSessionSelected(pid, sid)">
+			{{ session.day |  date:'MMM d' }}
+		</span>
+	</div>
+</div>
+</div>
+</div>
+</div>

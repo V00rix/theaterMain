@@ -1,0 +1,7 @@
+<div class="bgimg" [ngStyle]="getBackground()"></div>
+<div class="foreground" (click)="displayInfo()">
+	<div class="perfInfo">
+		<h1>{{ performance.Performance_name | uppercase }}</h1>
+		<h2>{{ getDescription(performance) | uppercase }}</h2>
+	</div>
+</div>

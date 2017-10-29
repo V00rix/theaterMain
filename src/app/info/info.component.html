@@ -1,19 +1,28 @@
-<div class="container">
-	<div class="row">
-		<!-- Short -->
-		<div class="col-xs-8">
-			<div class="description">
-				<h3>Title: {{ this.performance.name }}</h3>
-				<h3>Description: {{ this.performance.description }}</h3>
-				<!-- Some other data should be written here -->
-				<h3>Premiere: {{ this.performance.sessions[0].time | date:'mediumDate' }}</h3>
+
+<div class="wrapper" [@inOpacityScale]="'displayed'">	
+	<div class="container-fluid">
+		<div class="row">
+			<!-- Short Description -->
+			<div class="col-xs-12">
+				<div class="description">
+					<h3>Title: {{ performance.Performance_name }}</h3>
+					<h3 *ngFor="let field of performance.info">{{field.key + ": "+ field.value}}</h3>
+					<h3>Premiere: {{ performance.Sessions[0].date | date:'mediumDate' }}</h3>
+				</div>
 			</div>
 		</div>
-		<!-- Cover image -->
-		<div class="col-xs-4">
-			<img src="http://static.wixstatic.com/media/7522cb_f0b35177ad9a41c0ae0c0bdb99976fc1~mv2.jpg/v1/fill/w_753,h_480,al_c,q_85/7522cb_f0b35177ad9a41c0ae0c0bdb99976fc1~mv2.webp" alt="" class="cover img-responsive">
+		<div class="row">
+			<div class="col-xs-12">
+				<h3>Sessions</h3>
+				<div *ngFor="let session of this.performance.groupedSessions(); let id = index" class="sessionLink">
+					<div class="day">{{ session.day | date:'MMM d' }}</div> 
+					<select *ngIf="smallScreen()">
+						<option *ngFor="let sess of session.sessions; let sid = index" class="time" (click)="onSessionSelected(id + sid)">{{ sess.date | date:'H:mm' }}</option>
+					</select>
+					<div *ngFor="let sess of session.sessions; let sid = index" class="time" (click)="onSessionSelected(id + sid)"><ng-container *ngIf="!smallScreen()">
+					{{ sess.date | date:'H:mm' }}</ng-container></div>
+				</div>
+			</div>
 		</div>
-		<app-sessions [performance]="this.performance" 
-		[pid]="this.pid"></app-sessions>
 	</div>
 </div>

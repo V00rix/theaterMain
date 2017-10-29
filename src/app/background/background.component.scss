@@ -1,0 +1,78 @@
+div {
+	&.bgimg {
+		// default background
+		background: linear-gradient(121deg, rgba(105,250,255,1) 0%, rgba(36,29,128,1) 100%); 
+		// background
+		background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
+		width: 100wh;
+		height: 90vh;
+		background-size: 400% 400%;
+		background-repeat: no-repeat;
+		background-position: 52% 52%;
+		filter: brightness(50%) blur(5px);
+		// // white border fix
+		transform: scale(1.5); 
+		// // position
+		position: relative;
+		// size
+		height: 100%;
+		width: 100%;
+		// animation
+		animation: Gradient 15s ease-in-out infinite;
+	}
+	&.foreground {
+		// position
+		position: absolute;
+		top: 0;
+		// size
+		height: 100%;
+		width: 100%;
+		// align
+		text-align: center;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		cursor: pointer;
+	}
+	&.perfInfo {
+		padding: 50px;
+		margin: 15px;
+	}
+}
+
+h1, h2 {
+	color: black;
+	font-size: 10rem;
+	text-shadow: 0px 0px 20px black;
+}
+
+h2 {
+	font-size: 5rem;
+}
+
+/* Animations */
+// TODO: vertical not working
+// 		 animation isn't smooth 
+@keyframes bgfloat {
+	0%   {
+		background-position: 42% 42%;
+	}
+	50%  {
+		background-position: 58% 58%;
+	}
+	100% {
+		background-position: 42% 42%;
+	}
+}
+
+@keyframes Gradient {
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
+}

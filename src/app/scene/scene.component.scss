@@ -44,6 +44,10 @@ div
 			background-color: grey;
 			opacity: .3;
 		}
+		&.pending {
+			background-color: green;
+			opacity: .3;
+		}
 		&.inactive {
 			opacity: 0;
 		}
@@ -65,6 +69,42 @@ div
 	}
 }
 
+.return {
+	position: absolute;
+	top: 0;
+	left: 0;
+	margin: 15px;
+	padding: 5px;
+	color: white;
+	cursor: pointer;
+	font-size: 2em;
+	background-color: #565656;
+	color: transparent;
+	text-shadow: 0px 2px 3px rgba(255,255,255,0.5);
+	-webkit-background-clip: text;
+	-moz-background-clip: text;
+	background-clip: text;
+}
+
+.fileds {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	padding: 15px;
+	background-color: #cfcfcf;
+	box-shadow: 0px 0px 20px black;
+	overflow-y: scroll;
+}
+
+.hider {
+	position: absolute;
+	left: 0;
+	top: 0;
+	background-color: rgba(0,0,0,.8);
+	font-size: 50px;
+	display: table;
+}
+
 hr.invisible {
 	opacity: 0;
 	width: 80%;
@@ -73,14 +113,96 @@ hr.invisible {
 
 .no-overflow {
 	left: 0px;
-	width: 100%;
+	left: 50px; 
 	display: inline-block;
 	text-align: center;
-	overflow-x: scroll;
+}
+
+.vdiv {
+	text-align: center;
+	color: #3f405c;
+	width: 400px;
+	line-height: 50px;
+	display: table-cell; 
+	vertical-align: middle;
+}
+
+#showFields {
+	position: absolute;
+	font-size: 20px;
+	height: 50px;
+	width: 100px;
+	color: grey;
+	background-color: black;
+	border: 1px solid black;
+	line-height: 50px;
+	text-align: center;
+	cursor: pointer;
 }
 
 @media only screen and (max-width: 768px) {
-    h3 {
- 		text-align: left;
- 	}
+	.return {
+		display: none;
+	}
+}
+
+@media only screen and (max-width: 992px) {
+	
+	.fileds {
+		height: 400px;
+		width: 100%;
+	}
+	.hider {
+		top: 0;
+		height: calc(100% - 400px);
+		width: 100%;
+	}
+	#showFields {
+		right: calc(50% - 50px);
+		bottom: 0;
+		border-top-right-radius: 5px;
+		border-top-left-radius: 5px;
+	}
+	.anotherContainer {
+		position: absolute;
+		width: 100%;
+		height: 400px;
+		top: 170px;
+	}
+}
+
+/* Extra Small Devices, Phones */ 
+@media only screen and (min-width : 992px) {
+	.fileds {
+		width: 400px;
+		height: 100%;
+	}
+	.hider {
+		height: 100%;
+		left: 0;
+		width: calc(100% - 400px);
+	}
+	#showFields {
+		right: 0;
+		top: calc(50% - 25px);
+		border-bottom-left-radius: 5px;
+		border-top-left-radius: 5px;
+	}
+	.anotherContainer {
+		position: absolute;
+		top: 130px;
+		width: 700px;
+		height: 450px;
+		margin-left: 100px;
+	}
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+	.anotherContainer {
+		width: 960px;
+		height: 600px;
+		margin-left: 100px;
+	}
+
 }
