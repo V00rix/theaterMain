@@ -5,7 +5,7 @@
 		<h1> {{ performanceName | uppercase }} </h1>
 	</div>
 	<div>
-		<h3> {{ session.date | date:'MMMM d, H:m' }} </h3>
+		<h3> {{ session.date | date:'MMMM d, H:mm' }} </h3>
 	</div>
 </div>
 
@@ -14,7 +14,7 @@
 		<div class="anotherContainer" style="overflow: scroll;"  mouseWheel (mouseWheelUp)="onScroll(0.1, $event)" (mouseWheelDown)="onScroll(-0.1, $event)" #scrollElement>
 			<div style="display: table; width: 100%; height: 100%; z-index: 10; top: 0">
 				<div class="vdiv">
-					<div class="no-overflow" [style.height]="(34*(session.seats.length-1)+75)+'px'" [style.zoom]="zoomFactor">
+					<div class="no-overflow"  [style.zoom]="zoomFactor">
 						<div class="cont" [style.width]="((34*getLongestRow())+75)+'px'">
 							<div class="rowT" *ngFor="let row of session.seats; let i = index" [style.width]="(34*row.length+75)+'px'">
 								<hr class="invisible">

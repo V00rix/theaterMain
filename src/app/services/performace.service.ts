@@ -244,21 +244,29 @@ export class PerformanceService {
 	}
 	httpGetPerformances(): void {
 		this.performances = [];
-		this.http.get(this.getUrl)
-		.map(
-			(response: Response) => {
-				console.log(response);				
-				const performances: Performance[] = [];
-				for (let performance of <Performance[]>response.json()) {
-					performances.push(new Performance(performance.Performance_name,
-						performance.Background_url_path, []));
-					performances[performances.length - 1].info = performance.info;
-
-					for (let session of <Session[]>performance.Sessions)
-						performances[performances.length - 1].Sessions.push(new Session(new Date(session.date), session.seats));
-				};
-				return performances;
-			},
+				this.http.get(this.getUrl)
+				.map(
+					(response: Response) => {
+						console.log(response);				
+						const performances: Performance[] = [];				
+						if (<Performance[]>response.json() !== null) {
+							for (let performance of <Performance[]>response.json()) {
+								performances.push(new Performance(performance.Performance_name,
+									performance.Background_url_path, []));
+								performances[performances.length - 1].info = performance.info;
+								if (<Session[]>performance.Sessions !== undefined) {
+									for (let session of <Session[]>performance.Sessions) {
+										if (session.seats === undefined) {
+											session.seats = [];						
+										console.log(session.seats);
+										}
+										performances[performances.length - 1].Sessions.push(new Session(new Date(session.date), session.seats));
+									}
+								}
+							};
+						}
+						return performances;
+					},
 			(error: Response) => {
 				console.log(error);
 			}

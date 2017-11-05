@@ -7,7 +7,6 @@
 				<div class="description">
 					<h3>Title: {{ performance.Performance_name }}</h3>
 					<h3 *ngFor="let field of performance.info">{{field.key + ": "+ field.value}}</h3>
-					<h3>Premiere: {{ performance.Sessions[0].date | date:'mediumDate' }}</h3>
 				</div>
 			</div>
 		</div>

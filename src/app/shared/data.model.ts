@@ -2,7 +2,7 @@ export class Performance {
 	public info: { key: string, value: string }[] = null;
 	constructor(public Performance_name: string = "[Performance name]",
 		public Background_url_path: string = null,
-		public Sessions: Session[] = null,
+		public Sessions: Session[] = [],
 		...infoFields: { key: string, value: string }[]) {
 		this.info = infoFields;
 	}
@@ -57,10 +57,10 @@ export class Seat {
 }
 
 export class Viewer {
-	public static _Name = "John Smith";
-	public static _Phone = "+123-456-789-011";
-	public static _Email = "example@mail.com";
-	public static _VK = "vk.com/example_of_your_vk";
+	public static _Name = "Your Name";
+	public static _Phone = "777-777-777";
+	public static _Email = "your@mail.com";
+	public static _VK = "vk.com/your_vk";
 	public static _WhatsApp = "Your WhatsApp number";
 	public static _Viber = "Your Viber number";
 	public static _Telegram = "Your Telegram number";
