@@ -5,9 +5,9 @@
 	{{ 'Performances' | uppercase }}
 </h2>
 <div class="performance" 
-*ngFor="let performance of performances; let pid = index" 
+*ngFor="let performance of performances; let id = index" 
 [style.height]="(100/performances.length)+'%'" 
-(click)="onPerformanceSelected(pid)"
+(click)="onPerformanceSelected(id)"
 [@flyInLeft]="collapsed === true ? 'hidden' : (getWidth() ? 'fromTop' : 'displayed')">
 <div style="display: table; width: 100%; height: calc(100% - 15px); top: 0">
 	<div style="display: table-cell; vertical-align: middle;">
@@ -18,7 +18,7 @@
 		</div>
 		<div class="sessions">
 			<span class="sDate" *ngFor="let session of performance.groupedSessions(); let sid = index" 
-			(click)="onSessionSelected(pid, sid)">
+			(click)="onSessionSelected(id, sid)">
 			{{ session.day |  date:'MMM d' }}
 		</span>
 	</div>

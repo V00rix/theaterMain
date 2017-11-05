@@ -1,15 +1,18 @@
 div {
+	&.cont {
+		width: 100%;
+		height: 100%;
+	}
 	&.bgimg {
 		// default background
 		background: linear-gradient(121deg, rgba(105,250,255,1) 0%, rgba(36,29,128,1) 100%); 
 		// background
 		background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
-		width: 100wh;
-		height: 90vh;
-		background-size: 400% 400%;
+
+		background-size: 200% 200%;
 		background-repeat: no-repeat;
 		background-position: 52% 52%;
-		filter: brightness(50%) blur(5px);
+		filter: brightness(50%) blur(1.5px);
 		// // white border fix
 		transform: scale(1.5); 
 		// // position
@@ -41,9 +44,9 @@ div {
 }
 
 h1, h2 {
-	color: black;
+	color: #c0c0c0;
 	font-size: 10rem;
-	text-shadow: 0px 0px 20px black;
+	text-shadow: 0px 0px 10px black;
 }
 
 h2 {
@@ -74,5 +77,17 @@ h2 {
 	}
 	100% {
 		background-position: 0% 50%
+	}
+}
+
+@media only screen and (min-width : 768px) {
+	div.perfInfo {
+		padding: 150px;
+	}
+}
+
+@media only screen and (min-width : 992) {
+	div.perfInfo {
+		padding: 250px;
 	}
 }

@@ -26,14 +26,18 @@ export class PerformanceService {
 	public sid: number;
 	/* Array of performances */
 	public
- performances: Performance[];
+	performances: Performance[];
+
+	/* Urls for GET/PUT/... */
+	public getUrl = 'https://perfoseats.firebaseio.com/perfoseats.json';
+	public putUrl = 'https://perfoseats.firebaseio.com/perfoseats.json';
 
 	/* Constructor */
 	constructor(private route: ActivatedRoute, private router: Router, private http: Http) {
 		this.pid = 0; // there is always a selected performance
 		this.sid = null; // session gets specified due to some actions
-		// this.httpGetPerformances(); // switch
-		this.generatePerformances(); // switch
+		this.httpGetPerformances(); // switch
+		// this.generatePerformances(); // switch
 		// sort performances
 		for (let perf of this.performances) {
 			var arr = perf.Sessions;
@@ -198,7 +202,7 @@ export class PerformanceService {
 	}
 
 	public loadPerformances(performances: Performance[]): void {
-		this.performances = performances;		
+		this.performances = performances;			
 		this.performancesChanged.next({performances: this.performances, pid: this.pid, sid: this.sid});	
 	}
 
@@ -229,7 +233,7 @@ export class PerformanceService {
 	}
 
 	httpStorePerformances(): void {
-		this.http.put('https://perfoseats.firebaseio.com/perfoseats.json', this.getPerformances())
+		this.http.put(this.putUrl, this.getPerformances())
 		.subscribe(
 			(response: Response) => {
 				console.log("Response status: " + response.statusText);
@@ -240,19 +244,19 @@ export class PerformanceService {
 	}
 	httpGetPerformances(): void {
 		this.performances = [];
-		this.http.get('https://perfoseats.firebaseio.com/perfoseats.json')
+		this.http.get(this.getUrl)
 		.map(
 			(response: Response) => {
 				console.log(response);				
-				const performances: Performance[] = response.json();
-				for (let performance of performances) {
-					if (!performance['Sessions']) 
-						performance['Sessions'] = [];
-					for (let session of performance.Sessions) {
-						if (!session['Seats']) 
-							session.seats = [];
-					}
-				}
+				const performances: Performance[] = [];
+				for (let performance of <Performance[]>response.json()) {
+					performances.push(new Performance(performance.Performance_name,
+						performance.Background_url_path, []));
+					performances[performances.length - 1].info = performance.info;
+
+					for (let session of <Session[]>performance.Sessions)
+						performances[performances.length - 1].Sessions.push(new Session(new Date(session.date), session.seats));
+				};
 				return performances;
 			},
 			(error: Response) => {

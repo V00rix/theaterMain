@@ -34,7 +34,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 				Math.floor(Math.random()*200).toString(16));
 		this.pid = this.psv.pid;
 		this.subscription = this.psv.performancesChanged.subscribe(
-			({performances, pid, sid}) => {											
+			({performances, pid, sid}) => {																						
 				this.performances = this.psv.getPerformances();
 				this.pid = pid;
 			});
