@@ -3,10 +3,10 @@
   (resetTimer)="tryReset()" [collapsed]="collapse" [sceneShown]="scene"></app-header>
 </div>
 <div class="header back" *ngIf="(psv.performances.length &lt; 2) && (info || scene)" 
-[@fadeIn]="'displayed'" (click)="goBack()">
-<h2>Back</h2>
+[@fadeIn]="'displayed'" (click)="goBack()" [style.z-index]="2000">
+<h2>Назад</h2>
 </div>
-<div class="remainer" [ngClass]="{'remainer-full': psv.performances.length &lt; 2}">
+<div class="remainer" [ngClass]="{'remainer-full': psv.performances.length &lt; 2}" >
   <app-background (info)="displayInfo($event)" (click)="onCollapseHeader()"></app-background>
   <div class="hider" *ngIf="info" (click)="displayInfo(false)" [@fadeIn]="'displayed'"></div>
   <app-info [ngClass]="{'info remainer-full': psv.performances.length &lt; 2}" *ngIf="info" (scene)="displayScene($event)" (click)="onCollapseHeader()"></app-info>
@@ -22,16 +22,16 @@
     <div class="vdiv">
       <div class="messageBox">
         <div class="text-center">
-          <div class="return">Success!<br>
-          Confirmation request was sent to</div>
+          <div class="return">Успех!<br>
+          Подтверждение запроса было отправлено.</div>
           <div class="wrapper">
             <div><span class="name">{{confirmer.Name}}<button (click)="goTo('https://' + confirmer.VK)" class="button">VK</button></span></div>
-            <div><span class="field">Phone: {{confirmer.Phone}}</span></div>
-            <div><span class="field" >Email: {{confirmer.Email}}</span></div>
+            <div><span class="field">Моб.: {{confirmer.Phone}}</span></div>
+            <div *ngIf="testMail()"><span class="field" >Email: {{confirmer.Email}}</span></div>
             <div><span class="field">WhatsApp/Telegram/Viber: {{confirmer.WhatsApp}}</span></div>
           </div>
         </div>
-        <h2 class="return">(click to return to home page)</h2>
+        <h2 class="return">(вернуться на начальную страницу)</h2>
       </div>
     </div>
   </div>  

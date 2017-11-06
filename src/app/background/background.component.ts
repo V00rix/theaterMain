@@ -28,11 +28,11 @@ export class BackgroundComponent implements OnInit {
 
 	getDescription(performance: Performance) {	
 		if (performance.info) {	
-			let id = performance.info.findIndex(element => element.key === 'Description');
+			let id = performance.info.findIndex(element => element.key === 'Описание');
 			if (id < 0)
 				return "";
 			else 
-				return performance.info[id].value || "undefined";
+				return performance.info[id].value || undefined;
 		}
 		return "";
 	}

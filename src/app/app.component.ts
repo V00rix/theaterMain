@@ -13,14 +13,13 @@ import { Animations } from './animations/animations'
 	]
 })
 export class AppComponent implements OnInit {
-	title = 'app';
 	info = false;
 	scene = false;
 	message = false;
 	collapse = true;
 	interval;
 
-	public confirmer: Viewer = new Viewer('Chayka Alexandra', '+420-608-841-487', '',
+	public confirmer: Viewer = new Viewer('Чайка Александра', '+420-608-841-487', ' ',
 		'vk.com/die136148122', '773 689 106', '773 689 106', '773 689 106');
 
 	constructor(public psv: PerformanceService)  {}
@@ -29,6 +28,10 @@ export class AppComponent implements OnInit {
 		this.interval = setInterval(() => {
 			this.psv.nextPerformance();
 		}, 3000);
+	}
+
+	testMail() {
+		return  /^([a-zA-Z0-9.])*@([a-zA-Z])*\.([a-zA-Z])+$/.test(this.confirmer.Email);
 	}
 
 	goTo(url: string) {

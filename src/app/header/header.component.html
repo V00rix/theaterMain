@@ -2,7 +2,7 @@
 [style.z-index]="getWidth() ? 400 : 100"
 [style.height]="getWidth() ? (collapsed ? '50px' : 'auto') : '100%'" [style.overflow]="'none'">	
 <h2 (mouseenter)="switchCollapse()" (click)="clickCollapse()">
-	{{ 'Performances' | uppercase }}
+	{{ 'Представления' | uppercase }}
 </h2>
 <div class="performance" 
 *ngFor="let performance of performances; let id = index" 

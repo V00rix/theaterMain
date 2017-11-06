@@ -5,14 +5,14 @@
 			<!-- Short Description -->
 			<div class="col-xs-12">
 				<div class="description">
-					<h3>Title: {{ performance.Performance_name }}</h3>
+					<h3>{{ performance.Performance_name }}</h3>
 					<h3 *ngFor="let field of performance.info">{{field.key + ": "+ field.value}}</h3>
 				</div>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-xs-12">
-				<h3>Sessions</h3>
+				<h3>Сеансы</h3>
 				<div *ngFor="let session of this.performance.groupedSessions(); let id = index" class="sessionLink">
 					<div class="day">{{ session.day | date:'MMM d' }}</div> 
 					<select *ngIf="smallScreen()">

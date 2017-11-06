@@ -158,6 +158,14 @@ export class FieldsComponent implements OnInit {
 		return results;
 	}
 
+	getProperty(val) {
+		if (val === 'Name')
+			return 'Имя';
+		if (val === 'Phone')
+			return 'Телефон';
+		return val;
+	}
+
 	errorShown(shown: boolean, field, helper, messages?: string[]): void {
 		if (shown) {
 			if (field != null) {

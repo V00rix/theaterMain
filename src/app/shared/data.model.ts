@@ -57,13 +57,13 @@ export class Seat {
 }
 
 export class Viewer {
-	public static _Name = "Your Name";
+	public static _Name = "Имя";
 	public static _Phone = "777-777-777";
 	public static _Email = "your@mail.com";
 	public static _VK = "vk.com/your_vk";
-	public static _WhatsApp = "Your WhatsApp number";
-	public static _Viber = "Your Viber number";
-	public static _Telegram = "Your Telegram number";
+	public static _WhatsApp = "Номер WhatsApp";
+	public static _Viber = "Номер Viber";
+	public static _Telegram = "Номер Telegram";
 
 	constructor(
 		public Name: string = null, 
