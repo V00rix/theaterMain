@@ -1,27 +1,52 @@
-
-<div class="wrapper" [@inOpacityScale]="'displayed'">	
-	<div class="container-fluid">
-		<div class="row">
-			<!-- Short Description -->
-			<div class="col-xs-12">
-				<div class="description">
-					<h3>{{ performance.Performance_name }}</h3>
-					<h3 *ngFor="let field of performance.info">{{field.key + ": "+ field.value}}</h3>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-xs-12">
-				<h3>Сеансы</h3>
-				<div *ngFor="let session of this.performance.groupedSessions(); let id = index" class="sessionLink">
-					<div class="day">{{ session.day | date:'MMM d' }}</div> 
-					<select *ngIf="smallScreen()">
-						<option *ngFor="let sess of session.sessions; let sid = index" class="time" (click)="onSessionSelected(id + sid)">{{ sess.date | date:'H:mm' }}</option>
-					</select>
-					<div *ngFor="let sess of session.sessions; let sid = index" class="time" (click)="onSessionSelected(id + sid)"><ng-container *ngIf="!smallScreen()">
-					{{ sess.date | date:'H:mm' }}</ng-container></div>
-				</div>
-			</div>
-		</div>
-	</div>
+<div class="wrapper" [@inOpacityScale]="'displayed'">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Short Description -->
+            <div class="col-xs-12">
+                <div class="description">
+                    <h3>{{ performance.Performance_name }}</h3>
+                    <h3 *ngFor="let field of performance.info">{{field.key + ": "+ field.value}}</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <h3>Сеансы</h3>
+                <form action="">
+                    <div *ngFor="let session of this.performance.gSessions; let id = index"
+                         class="sessionLink form-row align-items-center">
+                        <div class="col-auto">
+                            <label class="sr-only" for="inlineFormInputGroup">Username</label>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="day">{{ session.day | date:'MMM d' }}</div>
+                                </div>
+                                <select id="inputState" class="form-control" id="inlineFormInputGroup">
+                                    <option *ngFor="let sess of session.sessions; let sid = index" class="time"
+                                            (click)="onSessionSelected(id + sid)">{{ sess.date | date:'H:mm' }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <!--<div *ngFor="let session of this.performance.gSessions; let id = index" class="sessionLink">-->
+                <!--<div class="col-auto">-->
+                <!--<label class="sr-only" for="inlineFormInputGroup">Username</label>-->
+                <!--<div class="input-group mb-2">-->
+                <!--<div class="input-group-prepend">-->
+                <!--<div class="input-group-text">@</div>-->
+                <!--</div>-->
+                <!--<input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Username">-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--<div class="day">{{ session.day | date:'MMM d' }}</div>-->
+                <!--<select *ngIf="smallScreen()">-->
+                <!--<option *ngFor="let sess of session.sessions; let sid = index" class="time" (click)="onSessionSelected(id + sid)">{{ sess.date | date:'H:mm' }}</option>-->
+                <!--</select>-->
+                <!--<div *ngFor="let sess of session.sessions; let sid = index" class="time" (click)="onSessionSelected(id + sid)"><ng-container *ngIf="!smallScreen()">-->
+                <!--{{ sess.date | date:'H:mm' }}</ng-container></div>-->
+            </div>
+        </div>
+    </div>
 </div>

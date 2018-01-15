@@ -6,7 +6,7 @@
 [@fadeIn]="'displayed'" (click)="goBack()" [style.z-index]="2000">
 <h2>Назад</h2>
 </div>
-<div class="remainer" [ngClass]="{'remainer-full': psv.performances.length &lt; 2}" >
+<div class="remainder" [ngClass]="{'remainer-full': psv.performances.length &lt; 2}" >
   <app-background (info)="displayInfo($event)" (click)="onCollapseHeader()"></app-background>
   <div class="hider" *ngIf="info" (click)="displayInfo(false)" [@fadeIn]="'displayed'"></div>
   <app-info [ngClass]="{'info remainer-full': psv.performances.length &lt; 2}" *ngIf="info" (scene)="displayScene($event)" (click)="onCollapseHeader()"></app-info>

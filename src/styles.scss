@@ -1,23 +1,26 @@
-// version 3
+// version 4
 @import 'variables';
-@import '../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap';
+@import '../node_modules/bootstrap/scss/bootstrap';
+
 body {
-	overflow: hidden;
+  overflow: hidden;
 }
+
 *:focus {
-    outline: none;
+  outline: none;
 }
-::-webkit-scrollbar
-{
-	width: 5px;
-	height: 5px;
-	background-color: transparent;
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+  background-color: transparent;
 }
-::-webkit-scrollbar-thumb
-{
-	background-color: #000000;
-	border: 2px solid black;
+
+::-webkit-scrollbar-thumb {
+  background-color: #000000;
+  border: 2px solid black;
 }
+
 ::-webkit-scrollbar-corner {
-	display: none;
+  display: none;
 }

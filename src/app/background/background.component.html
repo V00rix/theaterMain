@@ -1,5 +1,5 @@
 <div class="cont" *ngIf="performance$ | async as performance; else loading">
-	<div class="bgimg" [ngStyle]="getBackground(performance)"></div>
+	<div class="bgImg" [ngStyle]="getBackground(performance)"></div>
 	<div class="foreground" (click)="displayInfo()">
 		<div class="perfInfo">
 			<h1>
@@ -10,7 +10,7 @@
 	</div>
 </div>
 <ng-template #loading>
-	<div class="bgimg" style="background: black"></div>
+	<div class="bgImg" style="background: black"></div>
 	<div class="foreground">
 		<div class="perfInfo">
 			<h2  style="color: #c0c0c0">Загрузка...
